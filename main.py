@@ -2,6 +2,7 @@ from enum import Enum
 import random
 import pandas as pd
 import sys
+import matplotlib.pyplot as plt
 
 
 class Players(Enum):
@@ -34,15 +35,18 @@ class Player:
         # Use two separate dictionaries for row and columns weights
         # so 2x3 or any non nxn payoff matrix works as well.
         self.weights = {Players.P1: {}, Players.P2: {}}
+        self.log = {Players.P1: {}, Players.P2: {}}
+
         for row in payoff.df.index:
             self.weights[Players.P1][row] = 1 / len(payoff.df.index)
+            self.log[Players.P1][row] = [1 / len(payoff.df.index)]
 
         for col in payoff.df.columns:
             self.weights[Players.P2][col] = 1 / len(payoff.df.columns)
+            self.log[Players.P2][col] = [1 / len(payoff.df.columns)]
 
-        self.lr = 0.2
+        self.lr = 0.07
         self.scores = []
-        self.log = []
 
     def getStrategy(self, player):
         r = random.random()
@@ -62,7 +66,10 @@ class Player:
 
     def log_score(self, score):
         self.scores.append(score)
-        self.log.append(self.weights.copy())
+
+        for p in self.weights:
+            for strat in self.weights[p]:
+                self.log[p][strat].append(self.weights[p][strat])
 
     def _update_factor(self, score, player):
         scores = [s[player] for s in self.scores]
@@ -104,6 +111,11 @@ class Player:
         self._normalize_weights(Players.P1)
         self._normalize_weights(Players.P2)
 
+    def plot(self, plt, player):
+        series = self.log[player]
+        for key in series:
+            plt.plot(series[key], label=f"{key}, as {"P1" if player == Players.P1 else "P2"} ({player.value})")
+
 
 class RoundRobin:
     def __init__(self, payoff, numPlayers=10):
@@ -128,10 +140,19 @@ class RoundRobin:
                 p2 = (l - i - 2 + rnd) % (l - 1) + 1
                 self.matchup(p1, p2)
 
+    def plot(self, plt):
+        for i in range(len(self.players)):
+            self.players[i].plot(plt, Players.P1)
+            self.players[i].plot(plt, Players.P2)
+            plt.legend()
+            plt.show()
+
+
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("You must supply the csv file containing the payoff matrix as a command line argument.")
+        file = None
     else:
         file = sys.argv[1]
     
@@ -142,4 +163,4 @@ if __name__ == "__main__":
         rr = RoundRobin(payoff, 10)
         for i in range(50):
             rr.run_session()
-        print(rr.players[0].weights)
+        print(rr.plot(plt))
