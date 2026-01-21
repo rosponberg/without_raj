@@ -70,3 +70,25 @@ To run the program you must supply the payoff matrix file in the command line ar
 
 ## AI Usage
 AI was used to generate the docstrings and this readme file. Each were manually edited for accuracy and clarity.
+
+
+## Example Graphs
+
+### Prisoner's Dilemma
+As you can see, in all three of these trials, the strategies converged.
+![Prisoner's Dilemma Graph 1](https://github.com/rosponberg/without_raj/blob/main/example_graphs/prisoners_dilemma_1.png?raw=true)
+![Prisoner's Dilemma Graph 2](https://github.com/rosponberg/without_raj/blob/main/example_graphs/prisoners_dilemma_2.png?raw=true)
+![Prisoner's Dilemma Graph 3](https://github.com/rosponberg/without_raj/blob/main/example_graphs/prisoners_dilemma_3.png?raw=true)
+
+### Stag Hunt
+![Stag Hunt Graph 1](https://github.com/rosponberg/without_raj/blob/main/example_graphs/stag_hunt1.png?raw=true)
+![Stag Hunt Graph 2](https://github.com/rosponberg/without_raj/blob/main/example_graphs/stag_hunt2.png?raw=true)
+
+### Battle of the Sexes
+![Battle of the Sexes Graph 1](https://github.com/rosponberg/without_raj/blob/main/example_graphs/battle_sexes_1.png?raw=true)
+![Battle of the Sexes Graph 2](https://github.com/rosponberg/without_raj/blob/main/example_graphs/battle_sexes_2.png?raw=true)
+![Battle of the Sexes Graph 3](https://github.com/rosponberg/without_raj/blob/main/example_graphs/battle_sexes_3.png?raw=true)
+
+### Rock Paper Scissors
+![Rock Paper Scissors Graph 1](https://github.com/rosponberg/without_raj/blob/main/example_graphs/rock_paper_scissors_1.png?raw=true)
+![Rock Paper Scissors Graph 2](https://github.com/rosponberg/without_raj/blob/main/example_graphs/rock_paper_scissors_2.png?raw=true)
